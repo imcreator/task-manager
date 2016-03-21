@@ -1,0 +1,48 @@
+@import "bourbon";
+
+// Spinner Variables
+//********************************************************//
+$color:      #ffffff;
+$size:       30px;
+$speed:      0.75s;
+$thickness:  8px; // Odd numbers created a "wobble" effect.
+
+
+// Animation Keyframes
+//********************************************************//
+@mixin rotate-forever {
+  0%    { @include transform(rotate(0deg)); }
+  100%  { @include transform(rotate(360deg)); }
+}
+@-webkit-keyframes rotate-forever { @include rotate-forever; }
+   @-moz-keyframes rotate-forever { @include rotate-forever; }
+        @keyframes rotate-forever { @include rotate-forever; }
+
+
+// The Loading Spinner™
+//********************************************************//
+.loading-spinner {
+  @include animation-duration($speed);
+  @include animation-iteration-count(infinite);
+  @include animation-name(rotate-forever);
+  @include animation-timing-function(linear);
+  @include size($size);
+  border: $thickness solid $color;
+  border-right-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+
+//********************************************************//
+// This stuff is just for presentation on Codepen.
+// You don't need it.
+//********************************************************//
+body {
+  background: #774CFF;
+}
+
+.loading-spinner {
+  @include position(absolute, 50% 0 0 50%);
+  margin: -$size/2 0 0 -$size/2;
+}
